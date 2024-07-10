@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button clicks</title>
+    <script>
+        let count=0;
+        function loadContent() {
+            count++;
+            var btn=document.getElementById('btn');
+            
+
+            document.getElementById('content').innerHTML=count;
+        }
+    </script>
+</head>
+<body>
+    <button type="button" id="btn" onclick="loadContent()">Load Content</button>
+    <div id="content">
+        <h1>hi</h1>
+    </div>
+</body>
+</html>

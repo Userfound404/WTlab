@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <script>
+        function validateForm() {
+            var name = document.forms["registrationForm"]["name"].value;
+            var password = document.forms["registrationForm"]["password"].value;
+            var email = document.forms["registrationForm"]["email"].value;
+            var phone = document.forms["registrationForm"]["phone"].value;
+            var sex = document.forms["registrationForm"]["sex"].value;
+            var day = document.forms["registrationForm"]["day"].value;
+            var month = document.forms["registrationForm"]["month"].value;
+            var year = document.forms["registrationForm"]["year"].value;
+            var languages = document.forms["registrationForm"]["languages"];
+            var address = document.forms["registrationForm"]["address"].value;
+
+            // Validate Name
+            if (name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+
+            // Validate Password
+            if (password == "") {
+                alert("Password must be filled out");
+                return false;
+            }
+
+            // Validate Email
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Invalid email format");
+                return false;
+            }
+
+            // Validate Phone Number
+            var phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Phone number must be 10 digits");
+                return false;
+            }
+
+            // Validate Sex
+            var sexChecked = false;
+            for (var i = 0; i < document.forms["registrationForm"]["sex"].length; i++) {
+                if (document.forms["registrationForm"]["sex"][i].checked) {
+                    sexChecked = true;
+                    break;
+                }
+            }
+            if (!sexChecked) {
+                alert("Please select your sex");
+                return false;
+            }
+
+            // Validate Date of Birth
+            if (day == "" || month == "" || year == "") {
+                alert("Please select your date of birth");
+                return false;
+            }
+
+            // Validate Languages Known
+            var languagesChecked = false;
+            for (var i = 0; i < languages.length; i++) {
+                if (languages[i].checked) {
+                    languagesChecked = true;
+                    break;
+                }
+            }
+            if (!languagesChecked) {
+                alert("Please select at least one language");
+                return false;
+            }
+
+            // Validate Address
+            if (address == "") {
+                alert("Address must be filled out");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form name="registrationForm" onsubmit="return validateForm()" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone"><br><br>
+
+        <label>Sex:</label>
+        <input type="radio" id="male" name="sex" value="male"> Male
+        <input type="radio" id="female" name="sex" value="female"> Female<br><br>
+
+        <label>Date of Birth:</label>
+        <select id="day" name="day">
+            <option value="">Day</option>
+            <!-- Add day options here -->
+            <script>
+                for (var i = 1; i <= 31; i++) {
+                    document.write('<option value="' + i + '">' + i + '</option>');
+                }
+            </script>
+        </select>
+        <select id="month" name="month">
+            <option value="">Month</option>
+            <!-- Add month options here -->
+            <script>
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                for (var i = 0; i < months.length; i++) {
+                    document.write('<option value="' + (i + 1) + '">' + months[i] + '</option>');
+                }
+            </script>
+        </select>
+        <select id="year" name="year">
+            <option value="">Year</option>
+            <!-- Add year options here -->
+            <script>
+                var currentYear = new Date().getFullYear();
+                for (var i = currentYear; i >= 1900; i--) {
+                    document.write('<option value="' + i + '">' + i + '</option>');
+                }
+            </script>
+        </select><br><br>
+
+        <label>Languages Known:</label>
+        <input type="checkbox" id="english" name="languages" value="English"> English
+        <input type="checkbox" id="telugu" name="languages" value="Telugu"> Telugu
+        <input type="checkbox" id="hindi" name="languages" value="Hindi"> Hindi
+        <input type="checkbox" id="tamil" name="languages" value="Tamil"> Tamil<br><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
